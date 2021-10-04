@@ -1,0 +1,161 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block meta %}
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,200italic);
+        #button-inbox:hover, #button-send:hover{
+            background-color: white;
+            color: green;
+        }
+
+         .container {
+             background: #0095a9;
+        	 font-family: 'Source Sans Pro', sans-serif;
+        	 font-weight: 300;
+        	 max-width: 800px;
+        	 margin: auto;
+        }
+         .text-center {
+        	 text-align: center;
+        }
+         .quote-card {
+        	 background: #4bcdda;
+        	 color: #fff;
+        	 padding: 20px;
+        	 padding-left: 50px;
+        	 box-sizing: border-box;
+        	 box-shadow: 0 2px 4px rgba(34, 34, 34, 0.12);
+        	 position: relative;
+        	 overflow: hidden;
+        	 min-height: 120px;
+        }
+         quote.card > p {
+        	 font-size: 22px;
+        	 line-height: 1.5;
+        	 margin: 0;
+        	 max-width: 80%;
+        }
+         cite {
+        	 font-size: 16px;
+        	 margin-top: 10px;
+        	 display: block;
+        	 font-weight: 200;
+        	 opacity: 0.8;
+        }
+         cite:before {
+        	 font-family: Georgia, serif;
+        	 content: "“";
+        	 position: absolute;
+        	 top: 10px;
+        	 left: 10px;
+        	 font-size: 5em;
+        	 color: rgba(238, 238, 238, 0.8);
+        	 font-weight: normal;
+        }
+         cite:after {
+        	 font-family: Georgia, serif;
+        	 content: "”";
+        	 position: absolute;
+        	 bottom: -110px;
+        	 line-height: 100px;
+        	 right: -32px;
+        	 font-size: 25em;
+        	 color: rgba(238, 238, 238, 0.8);
+        	 font-weight: normal;
+        }
+         @media (max-width: 640px) {
+        	 :after {
+        		 font-size: 22em;
+        		 right: -25px;
+        	}
+        }
+        .wrapper {
+          height: 420px;
+          width: 654px;
+          margin: 50px auto;
+          border-radius: 7px 7px 7px 7px;
+          /* VIA CSS MATIC https://goo.gl/cIbnS */
+          -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+          -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+          box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-img {
+          float: left;
+          height: 420px;
+          width: 327px;
+        }
+
+        .product-img img {
+          border-radius: 7px 0 0 7px;
+        }
+
+        .product-info {
+          float: left;
+          height: 420px;
+          width: 327px;
+          border-radius: 0 7px 10px 7px;
+          background-color: #ffffff;
+        }
+
+        .product-text {
+          height: 300px;
+          width: 327px;
+        }
+
+        .product-text h1 {
+          padding-top: 90px;
+          font-size: 34px;
+          color: #474747;
+        }
+
+        .product-text h1 {
+          font-family: 'Source Sans Pro', sans-serif,'Bentham', serif;
+        }
+
+        .product-text h2 {
+          font-size: 13px;
+          font-family: 'Raleway', sans-serif;
+          font-weight: 400;
+          text-transform: uppercase;
+          color: #d2d2d2;
+          letter-spacing: 0.2em;
+        }
+
+        .product-text blockquote {
+          margin: 15px 15px;
+          height: 125px;
+          font-family: 'Source Sans Pro','Playfair Display', serif;
+          color: #8d8d8d;
+          line-height: 1.7em;
+          font-size: 15px;
+          font-weight: lighter;
+          overflow: hidden;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+    {% if state == 1 %}
+    <div class="alert alert-danger">User not found.</div>
+    {% endif %}
+    {% if state == 2 %}
+    <div class="alert alert-success">Mail sent.</div>
+    {% endif %}
+  <div class="wrapper">
+    <div class="product-img">
+      <img src=" https://picsum.photos/640/480" alt="Image not found" height="420" width="327" onerror="this.onerror=null;this.src='../static/image.jpg';" />
+    </div>
+    <div class="product-info">
+      <div class="product-text">
+        <h1>{{ quote["author"] }}</h1>
+        <h2>Random Quote n&#176; {{ quote["id"] }}</h2>
+        <blockquote>{{ quote["text"] }}</blockquote>
+      </div>
+    </div>
+  </div>
+{% endblock %}

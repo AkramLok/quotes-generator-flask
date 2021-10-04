@@ -1,0 +1,133 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block meta %}
+    <style>
+    @import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+    * {
+  transition: all 0.3s ease-out;
+}
+ .container {
+	 width: 100%;
+	 height: 100%;
+	 display: flex;
+	 flex-wrap: wrap;
+	 align-items: center;
+	 justify-content: center;
+}
+ h3 {
+	 color: #262626;
+	 font-size: 17px;
+	 line-height: 24px;
+	 font-weight: 700;
+	 margin-bottom: 4px;
+}
+ p {
+	 font-size: 17px;
+	 font-weight: 400;
+	 line-height: 20px;
+	 color: #666;
+}
+ p.small {
+	 font-size: 14px;
+}
+ .go-corner {
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+	 position: absolute;
+	 width: 32px;
+	 height: 32px;
+	 overflow: hidden;
+	 top: 0;
+	 right: 0;
+	 background-color: #0095a9;
+	 border-radius: 0 4px 0 32px;
+}
+ .go-arrow {
+	 margin-top: -4px;
+	 margin-right: -4px;
+	 color: white;
+	 font-family: courier, sans;
+}
+ .card2 {
+	 display: block;
+	 top: 0px;
+	 position: relative;
+	 max-width: 262px;
+	 background-color: #f2f8f9;
+	 border-radius: 4px;
+	 padding: 32px 24px;
+	 margin: 12px;
+	 text-decoration: none;
+	 z-index: 0;
+	 overflow: hidden;
+	 border: 1px solid #f2f8f9;
+}
+ .card2:hover {
+	 transition: all 0.2s ease-out;
+	 box-shadow: 0px 4px 8px rgba(38, 38, 38, 0.2);
+	 top: -4px;
+	 text-decoration: none;
+	 border: 1px solid #ccc;
+	 background-color: white;
+}
+ .card2:before {
+	 content: "";
+	 position: absolute;
+	 z-index: -1;
+	 top: -16px;
+	 right: -16px;
+	 background: #00838d;
+	 height: 32px;
+	 width: 32px;
+	 border-radius: 32px;
+	 transform: scale(2);
+	 transform-origin: 50% 50%;
+	 transition: transform 0.15s ease-out;
+}
+ .card2:hover:before {
+	 transform: scale(2.15);
+}
+    </style>
+{% endblock %}
+
+{% block main %}
+  <div class="d-flex align-items-center p-3 my-3 text-white bg-info rounded shadow-sm">
+    <div class="lh-1">
+      <h1 class="h6 mb-0 text-white lh-1" style ="text-align: left;">Quotes BY</h1>
+      <small>{{ auth }}</small>
+    </div>
+  </div>
+<div class="container">
+  {% for quote in quotes %}
+    <a onclick="copyElementText({{ loop.index }})" class="card2">
+    <h3>Quote {{ loop.index }}</h3>
+    <p id="{{ loop.index }}" class="small">{{ quote }}</p>
+    <div class="go-corner" href="#">
+      <div class="go-arrow">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 1 18 16">
+  <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+  <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+</svg>
+      </div>
+    </div>
+  </a>
+{% endfor %}
+</div>
+<script>
+function copyElementText(id) {
+    var text = document.getElementById(id).innerText;
+    var elem = document.createElement("textarea");
+    document.body.appendChild(elem);
+    elem.value = text;
+    elem.select();
+    document.execCommand("copy");
+    document.body.removeChild(elem);
+    alert("Text Copied: "+text);
+}
+</script>
+{% endblock %}

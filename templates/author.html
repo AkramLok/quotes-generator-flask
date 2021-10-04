@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Author
+{% endblock %}
+
+{% block meta %}
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/offcanvas-navbar/">
+    <meta name="robots" content="noindex">
+{% endblock %}
+
+{% block main %}
+  <div class="bg-info d-flex align-items-center text-white p-3 my-3  rounded shadow-sm" >
+    <div class="lh-1" style="text-align:left;">
+      <h1 class="h6 mb-0 lh-1" >Write Author's Name Correctly and Click Quote it</h1>
+      <small> Or Just Click Some Author Beneath The Input.</small>
+    </div>
+  </div>
+    <form action="/author" method="post">
+        <!--<div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" name="author" placeholder="Author Name" type="text">
+        </div>
+        <button class="btn btn-outline-primary" type="submit">Quote it</button>-->
+        <div class="input-group mb-3">
+          <input autocomplete="off" type="text" class="form-control" name="author" placeholder="Author Name">
+          <button class="btn btn-outline-info" type="submit" id="button-addon2">Quote it</button>
+        </div>
+    </form>
+    <ul class = "list-group list" id ="list" style = "list-style-type:none;"></ul>
+    <script>
+        let input = document.querySelector('input');
+        input.addEventListener('keyup', function() {
+            $.get('/search?q=' + input.value, function(quotes) {
+                document.querySelector('.list').innerHTML = quotes;
+                //$(".list").html(quotes);
+            });
+        });
+    </script>
+{% endblock %}

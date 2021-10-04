@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Password Change
+{% endblock %}
+
+{% block main %}
+    <form action="/pass" method="post" style="box-sizing: content-box;">
+        <div class="form-group">
+            <label for="inputPassword4">Password</label>
+            <input class="form-control" name="password" placeholder="Password" id="inputPassword4" type="password">
+        </div>
+        <div class="form-group">
+            <label for="inputPasswordAgain4">Password</label>
+            <input class="form-control" name="confirmation" id="inputPasswordAgain4" placeholder="Password Confirmation" type="password">
+        </div>
+        {% if request.method == "GET" %}
+            <div class="form-group">
+                <span class="">Generator</span>
+                  <input type="text" class="form-control" aria-label="Small" value="{{ password }}" readonly>
+            </div>
+        {% endif %}
+        <button class="btn btn-primary" type="submit">Password Change</button>
+    </form>
+{% endblock %}

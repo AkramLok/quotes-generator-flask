@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+{% block title %}
+    New Mail
+{% endblock %}
+
+{% block main %}
+    <form action="/send" method="post">
+        <div class="container" id="form" style="display: inline-block; width: 70%;">
+          <div class="d-flex align-items-center p-3 my-3 text-white bg-info rounded shadow-sm">
+                  <div class="lh-1">
+                      <h1 class="h6 mb-0 text-white lh-1" style ="text-align: left;">Send Mail</h1>
+                      <small>Send Quote AND/OR Message</small>
+                    </div>
+                  </div>
+            <div class="row">
+                <div class="col">
+                    <input type="text" name="recipient" id="recipient" placeholder="Recipient" class="form-control" style="margin-bottom: 15px;text-align: left;" autocomplete="off"><br>
+                    <input type="text" name="subject" id="subject" placeholder="Subject" class="form-control" style="margin-bottom: 15px;text-align: left;" autocomplete="off"><br>
+                    <input type="number" name="quote" id="quote" placeholder="Quote_id" min="0" max="1642" class="form-control"style="margin-bottom: 15px;text-align: left;" autocomplete="off"><br>
+                </div>
+                <div class="col-sm">
+                    <input type="submit" value="Send" id="send-button" class="btn btn-info text-center" disabled>
+                </div>
+            </div>
+        </div>
+        <textarea rows="6" name="message" placeholder="Message" id="message" class="form-control" aria-label="With textarea"></textarea><br>
+    </form>
+
+    <style>
+        #send-button{
+            margin-top: 10%;
+            margin-left: 0%;
+            float: left;
+        }
+
+        #message{
+            min-width: 50%;
+            height: 70%;
+            min-height:60%;
+            resize: none;
+        }
+        #recipient, #subject{
+            text-align: center;
+        }
+        input, #message{
+            color: black;
+        }
+        .row, .col-sm{
+            padding: 0;
+        }
+    </style>
+
+    <script>
+        var recipient = document.querySelector('#recipient');
+        var subject = document.querySelector('#subject');
+        var message = document.querySelector('#message');
+        var quote = document.querySelector('#quote');
+
+        recipient.onkeyup = f;
+        subject.onkeyup = f;
+        message.onkeyup = f;
+        quote.onkeyup = f;
+
+        function f(){
+            if (recipient.value == "" || subject.value == "" || (message.value == "" && quote.value == "")){
+                document.querySelector('#send-button').disabled = true;
+            }else{
+                document.querySelector('#send-button').disabled = false;
+            }
+        }
+
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var asw = url.searchParams.get("asw");
+        if (asw != "" && asw != null){
+            recipient.value = asw;
+        }
+        var sj = url.searchParams.get("sj");
+        if (sj != "" && sj != null){
+            subject.value = "AW: " + sj;
+        }
+    </script>
+
+{% endblock %}
