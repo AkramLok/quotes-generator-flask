@@ -1,4 +1,4 @@
-#### Description:
+## Description:
 Quoty is a web application that fetch, displays and even send quotes to others.
 This project was completed in CS50 IDE where it was initially hosted and served.
 New users start by registering a new account under "register" After filling in a unique email, first name, username, password, and confirming the password, then users are taken to the home. These values are immediately stored to the user table.
